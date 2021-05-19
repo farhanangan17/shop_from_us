@@ -1,6 +1,6 @@
 # shop_from_us
 
-A new Flutter application.
+A simple android e-commerce application developed by Dart. It is an on-going project.
 
 ## Getting Started
 
