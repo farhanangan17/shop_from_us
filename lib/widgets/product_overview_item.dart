@@ -27,7 +27,7 @@ class ProductOverviewItem extends StatelessWidget {
             //     MaterialPageRoute(builder: (ctx) => ProductDetailScreen(title),)
             // );
           },
-          child: Image.asset(
+          child: Image.network(
             product.imageUrl,
             fit: BoxFit.cover,
           ),
