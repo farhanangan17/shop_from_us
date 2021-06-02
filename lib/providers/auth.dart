@@ -9,7 +9,7 @@ class Auth with ChangeNotifier{
   String _userId;
 
   Future<void> signup(String email, String password) async{
-    var urll = Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=AIzaSyD_8X2uGNu-aiOn0uQ9LZauP6naGcENMzs');
+    var urll = Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[API Key]');
     final url = urll;
     final response = await http.post(
       url,
