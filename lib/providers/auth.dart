@@ -33,6 +33,7 @@ class Auth with ChangeNotifier{
   }
 
   Future<void> signup(String email, String password) async{
+<<<<<<< HEAD
     final url = Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD_8X2uGNu-aiOn0uQ9LZauP6naGcENMzs');
     try{
       final response = await http.post(
@@ -142,5 +143,20 @@ class Auth with ChangeNotifier{
     }
     final timeToExpiry = _expiryDate.difference(DateTime.now()).inSeconds;
     _authTimer = Timer(Duration(seconds: timeToExpiry), logout);
+=======
+    var urll = Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[API Key]');
+    final url = urll;
+    final response = await http.post(
+      url,
+      body: json.encode(
+        {
+          'email': email,
+          'password': password,
+          'returnSecureToken': true,
+        }
+      )
+    );
+    print(json.decode(response.body));
+>>>>>>> 2de7933a59de28903b4218c41527cbf3ed1f661f
   }
 }
