@@ -28,12 +28,8 @@ class Auth with ChangeNotifier{
     return _userId;
   }
 
-  Future<void> _authenticate(String email, ){
-
-  }
 
   Future<void> signup(String email, String password) async{
-<<<<<<< HEAD
     final url = Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API KEY]');
     try{
       final response = await http.post(
@@ -70,7 +66,7 @@ class Auth with ChangeNotifier{
 
   Future<void> login(String email, String password) async{
     final urll = Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API KEY]');
-    // final url = urll;
+    
     try{
       final response = await http.post(
         urll,
@@ -133,7 +129,7 @@ class Auth with ChangeNotifier{
     }
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
-    prefs.remove('userData');
+//     prefs.remove('userData');
     prefs.clear();
   }
   
@@ -143,20 +139,5 @@ class Auth with ChangeNotifier{
     }
     final timeToExpiry = _expiryDate.difference(DateTime.now()).inSeconds;
     _authTimer = Timer(Duration(seconds: timeToExpiry), logout);
-=======
-    var urll = Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[API Key]');
-    final url = urll;
-    final response = await http.post(
-      url,
-      body: json.encode(
-        {
-          'email': email,
-          'password': password,
-          'returnSecureToken': true,
-        }
-      )
-    );
-    print(json.decode(response.body));
->>>>>>> 2de7933a59de28903b4218c41527cbf3ed1f661f
   }
 }
