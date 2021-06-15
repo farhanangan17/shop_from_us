@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop_from_us/providers/products_provider.dart';
 
 import '../screens/product_detail_screen.dart';
 import '../providers/product.dart';
 import '../providers/cart.dart';
+import '../providers/products_provider.dart';
+import '../providers/auth.dart';
 
 class ProductOverviewItem extends StatelessWidget {
 
@@ -13,6 +14,7 @@ class ProductOverviewItem extends StatelessWidget {
     //listen false because though we need provider here but don't need to make whole widget listen - consumer is there
     final product = Provider.of<Product>(context, listen: false);
     final cart = Provider.of<Cart>(context, listen: false);
+    final authData = Provider.of<Auth>(context, listen: false);
     // final cartItem = Provider.of<CartItem>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -27,10 +29,16 @@ class ProductOverviewItem extends StatelessWidget {
             //     MaterialPageRoute(builder: (ctx) => ProductDetailScreen(title),)
             // );
           },
-          child: Image.network(
-            product.imageUrl,
-            fit: BoxFit.cover,
-          ),
+          child: Hero(
+            tag: product.id,
+            child: FadeInImage(
+              placeholder: AssetImage('assets/images/black screen.jpg'),
+              image: NetworkImage(
+                product.imageUrl,
+              ),
+              fit: BoxFit.cover,
+            ),
+          )
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black87,
@@ -40,7 +48,7 @@ class ProductOverviewItem extends StatelessWidget {
             builder: (ctx, product, child){
               return IconButton(
                 onPressed: (){
-                  product.toggleFavoriteStatus();
+                  product.toggleFavoriteStatus(authData.token, authData.userId);
                 },
                 icon: Icon(
                     product.isFavorite
